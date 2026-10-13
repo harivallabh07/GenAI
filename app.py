@@ -43,14 +43,16 @@ input_data={
     'EstimatedSalary':[estimated_salary]
 }
 
-geo_encoded=ohe_geo_encoder.transform([[geography]]).toarray()
-geo_encoded_df=pd.DataFrame(geo_encoded,columns=ohe_geo_encoder.get_feature_nemes_out(['Geography']))
+geo_encoded=ohe_geo_encoder.transform([[input_data['Geography']]]).toarray()
+geo_encoded_df=pd.DataFrame(geo_encoded,columns=ohe_geo_encoder.get_feature_names_out(['Geography']))
 
-input_data=pd.concatat([input_data.reset_index(drop=True),geo_encoded_df],axis=1)
+input_data=pd.DataFrame([input_data])
+input_data=pd.concat([input_data.drop('Geography',axis=1),geo_encoded_df],axis=1)
+input_data['Gender']=label_encoder_gender.transform(input_data['Gender'])
+
 input_data_scaled=scaler.transform(input_data)
 
 #prediction
-
 prediction=model.predict(input_data_scaled)
 prob=prediction[0][0]
 
