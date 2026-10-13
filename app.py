@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler,LabelEncoder,OneHotEncoder
 import pandas as pd
 import pickle
 
-model=tf.keras.load_model('model_1.h5')
+model=tf.keras.models.load_model('model_1.h5')
 
 
 with open('label_encoder_gender.pkl','rb') as file:
