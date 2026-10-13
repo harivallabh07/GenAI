@@ -29,7 +29,7 @@ num_of_pro=st.slider('Number of Products',0,10)
 has_cr_card=st.selectbox('Has Credit Card',[0,1])
 active=st.selectbox('Is Active',[0,1])
 
-#Example data
+
 input_data={
     'CreditScore':[credit_score],
     'Geography':[geography],
@@ -57,6 +57,6 @@ prediction=model.predict(input_data_scaled)
 prob=prediction[0][0]
 
 if prob<0.5:
-    st.write('Churn')
+    st.write('Customer is willing Churn')
 else:
-    st.write('Not Churn')
+    st.write('Customer is Not willing Churn')
